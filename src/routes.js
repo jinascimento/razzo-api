@@ -10,5 +10,6 @@ routes.use(cors());
  // articles
 routes.get('/articles', ArticleController.index);
 routes.post('/articles', ArticleController.store);
+routes.put('/articles/:id', ArticleController.update);
 
 export default routes;
