@@ -2,13 +2,13 @@ import { Router } from 'express';
 import cors from 'cors';
 const routes = new Router();
 
+import ArticleController from './app/controllers/ArticleController';
+
 // middlewares
 routes.use(cors());
 
-routes.get('/', (req, res, next) => {
-  res.json({ ok: true});
-  next;
-});
-
+ // articles
+routes.get('/articles', ArticleController.index);
+routes.post('/articles', ArticleController.store);
 
 export default routes;
