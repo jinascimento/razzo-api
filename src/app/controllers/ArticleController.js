@@ -9,13 +9,13 @@ class ArticleController {
   }
 
   async store(req, res) {
-    try {
+    try {  
       const { author, title, description, category } = req.body;
       const article = await Article.create({author, title, description, category});
+      return res.status(201);
 
-      return res.json(article).status(201);
     } catch (e) {
-      return res.json(e).status(400);
+      return res.status(400).json(e)
     }
   }
 
@@ -26,9 +26,9 @@ class ArticleController {
           _id:req.params.id
         }, req.body, {new: true});
 
-      return res.json(article).status(200);
+      return res.status(200).json(article);
     } catch (e) {
-      return res.json(e).status(400);
+      return res.status(400).json(e);
     }
   }
 }
