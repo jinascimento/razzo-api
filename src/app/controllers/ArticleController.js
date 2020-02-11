@@ -9,10 +9,10 @@ class ArticleController {
   }
 
   async store(req, res) {
-    try {  
+    try {
       const { author, title, description, category } = req.body;
       const article = await Article.create({author, title, description, category});
-      return res.status(201);
+      return res.status(201).json(article);
 
     } catch (e) {
       return res.status(400).json(e)
