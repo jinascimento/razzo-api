@@ -31,6 +31,29 @@ class ArticleController {
       return res.status(400).json(e);
     }
   }
+
+
+  async destroyArticles(req, res) {
+    const ids = req.query.id;
+
+    const session = await Article.startSession();
+    session.startTransaction();
+
+    try {
+       ids.forEach(async (val) => {
+        await Article.findOneAndDelete({ _id: val });
+      });  
+
+      await session.commitTransaction();
+      session.endSession();  
+      return res.status(200).json()
+    } catch(e) {
+      await session.abortTransaction();
+      session.endSession();
+      throw error; 
+      return res.status(400).json(e)
+    }
+  }
 }
 
 export default new ArticleController();
